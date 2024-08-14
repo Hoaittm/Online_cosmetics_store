@@ -1,0 +1,18 @@
+﻿@model TranThiMinhHoai_2122110262.Models.Post
+@{
+    ViewBag.Title = "Post Details";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <img src="@Url.Content("~/Content/images/posts/" + Model.image)" class="card-img-top" alt="@Model.title" style="height: 400px; object-fit: cover;">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.title</h3>
+                    <p class="card-text">@Html.Raw(Model.detail)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

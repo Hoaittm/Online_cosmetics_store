@@ -1,0 +1,62 @@
+﻿
+@model List<TranThiMinhHoai_2122110262.Models.Product>
+
+
+<section class="section-content py-4">
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-6 mb-3">
+                    <figure class="card card-product-grid card-sm h-100">
+                        <div class="text-wrap pl-2">
+                            @if (product.pricesale.HasValue && product.price.HasValue)
+                            {
+                                <span class="badge bg-danger mt-2">
+                                    -@Math.Round((1 - (product.pricesale.Value / product.price.Value)) * 100, 0)%
+                                </span>
+                            }
+                        </div>
+                        <a href="@Url.Action("Details", "Product", new { id = product.id })" class="img-wrap d-block">
+                            <img src="@Url.Content("~/Content/images/product/" + product.image)" class="img-fluid m-2" alt="@product.name">
+                        </a>
+                        <div class="text-wrap p-3">
+                            <a href="@Url.Action("Details", "Product", new { id = product.id })" class="title d-block text-decoration-none">@product.name</a>
+                            <div class="justify-content-center">
+                                <span class="text text-muted mr-5">
+                                    <del>@product.price VND</del>
+                                </span>
+                                <span class="text text-danger ms-2 ">
+                                    @product.pricesale VND
+                                </span>
+                            </div>
+                        </div>
+                    </figure>
+                </div>
+            }
+
+        </div> <!-- row.// -->
+    </div> <!-- container .//  -->
+</section>
+
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<section class="padding-y-lg bg-light border-top">
+    <div class="container">
+        <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-sm-6">
+                <form class="form-row">
+                    <div class="col-8">
+                        <input class="form-control" placeholder="Your Email" type="email">
+                    </div> <!-- col.// -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                    </div> <!-- col.// -->
+                </form>
+                <small class="form-text">We’ll never share your email address with a third-party. </small>
+            </div> <!-- col-md-6.// -->
+        </div>
+    </div>
+</section>
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->

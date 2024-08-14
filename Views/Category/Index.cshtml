@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TranThiMinhHoai_2122110262.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<section class="section-content py-4">
+    <div class="container">
+        <div class="row">
+            @foreach (var category in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card" style="width:240px">
+                        <img src="@Url.Content("~/Content/images/category/" + category.image)" class="card-img-top" style ="height:200px" alt="@category.name">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="@Url.Action("ListProductByCategory", "Category", new { id = category.id })" class="text-dark">
+                                    @category.name
+                                </a>
+                            </h4>
+                            <!--<ul class="list-unstyled">
+                                <li><a href="#" class="text-muted">@category.description</a></li>-->
+                                <!-- Add more items here if needed -->
+                            <!--</ul>-->
+                        </div>
+                    </div>
+                </div> <!-- col-md-3 -->
+            }
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>
+
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<section class="padding-y-lg bg-light border-top">
+    <div class="container">
+        <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-sm-6">
+                <form class="form-row">
+                    <div class="col-8">
+                        <input class="form-control" placeholder="Your Email" type="email">
+                    </div> <!-- col.// -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                    </div> <!-- col.// -->
+                </form>
+                <small class="form-text">We’ll never share your email address with a third-party. </small>
+            </div> <!-- col-md-6.// -->
+        </div>
+    </div>
+</section>
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->

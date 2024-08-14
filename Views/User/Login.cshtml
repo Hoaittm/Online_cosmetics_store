@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<section class="section-conten padding-y" style="min-height:84vh">
+    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        <div class="card-body">
+            <h4 class="card-title mb-4">Đăng nhập</h4>
+            <form asp-action="Login" asp-controller="User" method="post">
+                @Html.AntiForgeryToken()
+
+                <a href="#" class="btn btn-facebook btn-block mb-2">
+                    <i class="fab fa-facebook-f"></i> &nbsp; Đăng nhập bằng Facebook
+                </a>
+                <a href="#" class="btn btn-google btn-block mb-4">
+                    <i class="fab fa-google"></i> &nbsp; Đăng nhập bằng Google
+                </a>
+
+                <!-- General error message -->
+                @if (ViewData.ModelState[""]?.Errors.Count > 0)
+                {
+                    <div class="alert alert-danger">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+                <div class="form-group">
+                    <input name="Email" class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Email" type="email" value="@Request.Form["Email"]">
+                    <span class="text-danger">@Html.ValidationMessage("Email")</span>
+                </div>
+
+                <div class="form-group">
+                    <input name="Password" class="form-control @(ViewData.ModelState["Password"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Password" type="password">
+                    <span class="text-danger">@Html.ValidationMessage("Password")</span>
+                </div>
+
+                <div class="form-group">
+                    <a href="#" class="float-right">Quên mật khẩu ?</a>
+                    <label class="float-left custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input">
+                        <div class="custom-control-label">Nhớ mật khẩu</div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("Incorrect")</span>
+
+            </form>
+        </div>
+    </div>
+
+    <p class="text-center mt-4">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "User")">Đăng ký</a></p>
+    <br><br>
+</section>

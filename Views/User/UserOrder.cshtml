@@ -1,0 +1,82 @@
+﻿@model TranThiMinhHoai_2122110262.Models.UserProfileViewModel
+
+@{
+    ViewBag.Title = "User Profile";
+}
+
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Danh sách đơn hàng</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Status</th>
+                                    @*<th>Total Amount</th>*@
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderWithDetails in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>@orderWithDetails.Order.id</td>
+                                        <td>@orderWithDetails.Order.CreatedOnUtc.ToString("yyyy-MM-dd")</td>
+                                        <td>@orderWithDetails.Order.status</td>
+                                        @*<td>@orderWithDetails.Order.amount.ToString()</td>*@
+                                        <td>
+                                            <button class="btn bg-primary toggle-details" type="button" data-id="@orderWithDetails.Order.id">
+                                                Xem chi tiết đơn hàng
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-details collapse" id="orderDetails-@orderWithDetails.Order.id">
+                                        <td colspan="5">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product ID</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var detail in orderWithDetails.OrderDetails)
+                                                    {
+                                                        <tr>
+                                                            <td>@detail.product_id</td>
+                                                            <td>@detail.qty</td>
+                                                           
+                                                            <OrderWithDetailsModel>
+                                                               
+                                                                    <td>@detail.price.ToString() VND</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function () {
+        $('.toggle-details').click(function () {
+            var orderId = $(this).data('id');
+            $('#orderDetails-' + orderId).collapse('toggle');
+        });
+    });</script>

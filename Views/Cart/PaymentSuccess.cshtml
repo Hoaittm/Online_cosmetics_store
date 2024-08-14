@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Payment Success";
+}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center text-success">Thanh toán thành công!</h2>
+                        <p class="text-center">Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được đặt thành công và hiện đang được xử lý.</p>
+                        <hr>
+                        @*<div class="text-center">
+                                <p>Order Number: <strong>@ViewBag.OrderNumber</strong></p>
+                                <p>Total Amount Paid: <strong>USD @ViewBag.TotalAmount</strong></p>
+                                <p>Estimated Delivery Date: <strong>@ViewBag.DeliveryDate</strong></p>
+                            </div>*@
+                        <div class="text-center mt-4">
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng.</a>
+                            @*<a href="@Url.Action("OrderHistory", "User")" class="btn btn-secondary">View Order History</a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

@@ -1,0 +1,45 @@
+﻿@model TranThiMinhHoai_2122110262.Models.UserProfileViewModel
+
+@{
+    ViewBag.Title = "User Profile";
+}
+
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">Thông tin người dùng </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                    
+                          
+                                <p><strong>Họ tên:</strong> @Model.User.name</p>
+                                <p><strong>Giới tính:</strong> @Model.User.gender</p>
+                            </div>
+                            <div class="col-md-6">
+                                @*<p><strong>Phone:</strong> @Model.User.phone</p>*@
+                                <p><strong>Email:</strong> @Model.User.email</p>
+                                <p><strong>Thành phố:</strong> @Model.User.city</p>
+                                <p><strong>Quốc gia:</strong> @Model.User.country</p>
+                                @*<p><strong>Roles:</strong> @Model.User.roles</p>*@
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            @using (Html.BeginForm("Logout", "User", FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-danger btn-lg">Logout</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

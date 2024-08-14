@@ -1,0 +1,160 @@
+﻿@model List<TranThiMinhHoai_2122110262.Models.CartModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col" width="120">Số lượng</th>
+                                <th scope="col" width="120">Giá</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    if (item.Product != null)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <figure class="itemside">
+                                                    <div class="aside"><img src="~/Content/images/product/@item.Product.image" class="img-sm" alt="@item.Product.name"></div>
+                                                    <figcaption class="info">
+                                                        <a href="@Url.Action("Details", "Product", new { id = item.Product.id })" class="title text-dark">@item.Product.name</a>
+                                                        <p class="text-muted small">Danh mục: @item.Product.category_id, Thương hiệu: @item.Product.brand_id</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>
+                                                <select class="form-control quantity" data-id="@item.Product.id">
+                                                    @for (int i = 1; i <= 10; i++)
+                                                    {
+                                                        <option value="@i" @(i == item.Quantity ? "selected" : "")>@i</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="price-wrap">
+                                                    @if (item.Product.pricesale.HasValue && item.Product.pricesale > 0)
+                                                    {
+                                                        <var class="price">@((item.Product.pricesale.Value * item.Quantity).ToString("N0"))</var>
+                                                        <small class="text-muted">
+                                                            <del>@((item.Product.price * item.Quantity).ToString())</del>
+                                                        </small>
+                                                    }
+                                                    else
+                                                    {
+                                                        <var class="price">@((item.Product.price * item.Quantity).ToString())</var>
+                                                    }
+                                                </div> <!-- price-wrap .// -->
+                                            </td>
+
+                                            <td class="text-right">
+                                                <a href="javascript:void(0);" class="btn btn-light btn-round remove-item" data-id="@item.Product.id">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center">Giỏ hàng trống</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="@Url.Action("Payment", "Cart")" class="btn btn-primary float-md-right"> Thanh toán <i class="fa fa-chevron-right"></i> </a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Giao hàng miễn phí trong vòng 1-2 tuần</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Tổng giá:</dt>
+                            <dd class="text-right"> @ViewBag.TotalPrice VND</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Giảm giá:</dt>
+                            <dd class="text-right"> @ViewBag.Discount VND</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Tổng cộng:</dt>
+                            <dd class="text-right h5"><strong> @ViewBag.GrandTotal VND</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="~/Content/images/misc/payments.png" height="26">
+                        </p>
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+            </aside>
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".remove-item").click(function () {
+            var id = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Cart")',
+                data: JSON.stringify({ id: id }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alert(response.Message);
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error while removing item from cart");
+                }
+            });
+        });
+
+       $(".quantity").change(function () {
+    var id = $(this).data("id");
+    var quantity = $(this).val();
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("UpdateQuantity", "Cart")',
+        data: JSON.stringify({ id: id, quantity: quantity }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert(response.Message);
+            location.reload(); // Reload to update the price and totals
+        },
+        error: function () {
+            alert("Error while updating quantity");
+        }
+    });
+});
+    });
+</script>

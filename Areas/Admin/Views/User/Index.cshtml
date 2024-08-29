@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TranThiMinhHoai_2122110262.Models.User>
+
+@{
+    ViewBag.Title = "Danh sách người dùng";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Giới tính</th>
+                        <th>Số điện thoại</th>
+                        <th>Thành phố</th>
+                        <th>Quốc gia</th>
+                        <th>Chi tiết đơn hàng</th>
+                        <th>Hành động</th> <!-- Add this column for actions like delete -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.id</td>
+
+
+                            <td>@user.name</td>
+                            <td>@user.email</td>
+                            <td>@user.gender</td>
+                            <td>@user.phone</td>
+                            <td>@user.city</td>
+                            <td>@user.country</td>
+                            <td>
+                                @Html.ActionLink("Chi tiết đơn hàng", "Details", new { id = user.id }, new { @class = "btn btn-info btn-sm" })
+                            </td>
+                            <td>
+                                <form action="@Url.Action("Delete", "User", new { id = user.id })" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i> Xóa
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

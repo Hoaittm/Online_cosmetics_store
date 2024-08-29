@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TranThiMinhHoai_2122110262.Models.Product>
+
+@{
+    ViewBag.Title = "Thùng rác sản phẩm";
+}
+
+
+<!-- NỘI DUNG -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thùng rác sản phẩm</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 text-right">
+                    @Html.ActionLink("Quay về danh sách", "Index", null, new { @class = "btn btn-sm btn-success" })
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width:30px;">ID</th>
+                        <th class="text-center" style="width:90px;">Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Mã danh mục</th>
+                        <th>Mã thương hiệu</th>
+                        <th>Giá bán</th>
+                        <th style="width: 150px">Giá khuyến mãi</th>
+                        <th class="text-center" style="width:200px;">Chức năng</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @item.id
+                            </td>
+                            <td class="text-center">
+                                <img src='@Url.Content("~/Content/images/product/" + item.image)' alt='@item.name'
+                                     style="width:100px; height:100px" />
+                            </td>
+                            <td>@item.name</td>
+                            <td>@item.category_id</td>
+                            <td>@item.brand_id</td>
+                            <td>@item.price</td>
+                            <td>@item.pricesale</td>
+                            <td class="text-center">
+                                <a href="@Url.Action("Details", "Product", new { id = item.id })" class="btn btn-sm btn-info">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                                <a href="@Url.Action("Restore", "Product", new { id = item.id })" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                </a>
+                                @using (Html.BeginForm("Destroy", "Product", FormMethod.Post, new { style = "display: inline" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("id", item.id)
+                                    <button class="btn btn-sm btn-danger" type="submit" title="Xóa vĩnh viễn">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

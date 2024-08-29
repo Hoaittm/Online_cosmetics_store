@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TranThiMinhHoai_2122110262.Models.Brand>
+
+@{
+    ViewBag.Title = "Thùng rác thương hiệu";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thùng rác thương hiệu</h1>
+            </div>
+            <div class="col-sm-6 text-right">
+                @Html.ActionLink("Quay về danh sách", "Index", null, new { @class = "btn btn-sm btn-danger" })
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width:30px;">ID</th> 
+                        @*<th class="text-center" style="width:90px;">Hình ảnh</th>*@
+                        <th>Tên thương hiệu</th>
+                        <th>Slug</th>
+                        <th class="text-center" style="width:200px;">Chức năng</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td class="text-center">
+                            @item.id
+                        </td>
+                        @*<td class="text-center">
+                            <img src='@Url.Content("~/Content/Images/Brands/" + item.image)' alt='@item.name' style="width:100px; height:100px" />
+                        </td>*@
+                        <td>@item.name</td>
+                        <td>@item.slug</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Details", "Brand", new { id = item.id })" class="btn btn-sm btn-info" title="View">
+                                <i class="far fa-eye"></i>
+                            </a>
+                            <a href="@Url.Action("Restore", "Brand", new { id = item.id })" class="btn btn-sm btn-primary" title="Restore">
+                                <i class="fa fa-undo" aria-hidden="true"></i>
+                            </a>
+                            @using (Html.BeginForm("Destroy", "Brand", FormMethod.Post, new { style = "display: inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("id", item.id)
+                                <button class="btn btn-sm btn-danger" type="submit" title="Xóa vĩnh viễn">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            }
+                        </td>
+
+                    </tr>
+                    }
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center">Không có thương hiệu nào trong thùng rác.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

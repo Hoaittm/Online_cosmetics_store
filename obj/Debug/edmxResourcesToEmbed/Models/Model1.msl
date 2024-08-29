@@ -69,23 +69,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Brands">
-      <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Brand">
-        <MappingFragment StoreEntitySet="Brand">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
-          <ScalarProperty Name="created_by" ColumnName="created_by" />
-          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
-          <ScalarProperty Name="created_at" ColumnName="created_at" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="sort_order" ColumnName="sort_order" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="slug" ColumnName="slug" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Banners">
       <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Banner">
         <MappingFragment StoreEntitySet="Banner">
@@ -151,6 +134,23 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

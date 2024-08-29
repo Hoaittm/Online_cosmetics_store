@@ -29,10 +29,10 @@ namespace TranThiMinhHoai_2122110262.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Orderdetail> Orderdetails { get; set; }
-        public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
     }
 }

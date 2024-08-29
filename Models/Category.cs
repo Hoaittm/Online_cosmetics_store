@@ -11,7 +11,9 @@ namespace TranThiMinhHoai_2122110262.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Category
     {
         public long id { get; set; }
@@ -26,5 +28,7 @@ namespace TranThiMinhHoai_2122110262.Models
         public int created_by { get; set; }
         public Nullable<int> updated_by { get; set; }
         public byte status { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

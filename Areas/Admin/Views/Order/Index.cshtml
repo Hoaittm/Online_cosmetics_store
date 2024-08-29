@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TranThiMinhHoai_2122110262.Models.Order>
+
+@{
+    ViewBag.Title = "Danh sách đơn hàng";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="breadcrumb-item active">Orders</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Ngày tạo</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+                        <th>Số tiền</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.id</td>
+                            <td>@order.userid</td>
+                            <td>@order.CreatedOnUtc.ToString("dd/MM/yyyy")</td>
+                            <td>@order.address</td>
+                            <td>
+                                @if (order.status == 1)
+                                {
+                                    @:Đã xử lý
+                                }
+                                else
+                                {
+                                    @:Chưa xử lý
+                                }
+                            </td>
+                            <td>@order.amount.ToString()</td>
+                            <td>
+                                @Html.ActionLink("Chi tiết", "Details", new { id = order.id }, new { @class = "btn btn-sm btn-info" })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

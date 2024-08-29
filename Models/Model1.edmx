@@ -26,17 +26,17 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="1000" />
-          <Property Name="slug" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="image" Type="nvarchar" MaxLength="1000" />
-          <Property Name="sort_order" Type="int" Nullable="false" />
-          <Property Name="description" Type="text" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="slug" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="image" Type="nvarchar" MaxLength="255" />
+          <Property Name="sort_order" Type="int" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
           <Property Name="created_by" Type="int" Nullable="false" />
           <Property Name="updated_by" Type="int" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -190,11 +190,11 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="Orderdetail" EntitySet="Orderdetails" />
           </AssociationSet>
-          <EntitySet Name="Brands" EntityType="TranThiMinhHoaiModel1.Brand" />
           <EntitySet Name="Banners" EntityType="TranThiMinhHoaiModel1.Banner" />
           <EntitySet Name="Users" EntityType="TranThiMinhHoaiModel1.User" />
           <EntitySet Name="Posts" EntityType="TranThiMinhHoaiModel1.Post" />
           <EntitySet Name="Contacts" EntityType="TranThiMinhHoaiModel1.Contact" />
+          <EntitySet Name="Brands" EntityType="TranThiMinhHoaiModel1.Brand" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -274,22 +274,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Brand">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="slug" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="sort_order" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="created_at" Type="DateTime" Precision="3" />
-          <Property Name="updated_at" Type="DateTime" Precision="3" />
-          <Property Name="created_by" Type="Int32" Nullable="false" />
-          <Property Name="updated_by" Type="Int32" />
-          <Property Name="status" Type="Byte" Nullable="false" />
-        </EntityType>
         <EntityType Name="Banner">
           <Key>
             <PropertyRef Name="id" />
@@ -354,6 +338,22 @@
           <Property Name="status" Type="Byte" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Precision="7" />
           <Property Name="updated_at" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="slug" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sort_order" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="Int32" Nullable="false" />
+          <Property Name="updated_by" Type="Int32" />
+          <Property Name="status" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -429,23 +429,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Brand">
-              <MappingFragment StoreEntitySet="Brand">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
-                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="sort_order" ColumnName="sort_order" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="slug" ColumnName="slug" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Banners">
             <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Banner">
               <MappingFragment StoreEntitySet="Banner">
@@ -511,6 +494,23 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="TranThiMinhHoaiModel1.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

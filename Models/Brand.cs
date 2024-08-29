@@ -11,19 +11,23 @@ namespace TranThiMinhHoai_2122110262.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Brand
     {
         public int id { get; set; }
         public string name { get; set; }
         public string slug { get; set; }
         public string image { get; set; }
-        public int sort_order { get; set; }
+        public Nullable<int> sort_order { get; set; }
         public string description { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
         public int created_by { get; set; }
         public Nullable<int> updated_by { get; set; }
-        public byte status { get; set; }
+        public int status { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model TranThiMinhHoai_2122110262.Models.Brand
+
+@{
+    ViewBag.Title = "Thêm thương hiệu";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý thương hiệu</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="breadcrumb-item active">Brand Page</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-12 text-right">
+                        @Html.ActionLink("Về danh sách", "Index", null, new { @class = "btn btn-sm btn-info" })
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm("Create", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h1 class="text-center">Thêm thương hiệu</h1>
+                    <div class="container">
+                        <div class="row g-3">
+
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="name">Tên thương hiệu</label>
+                                <input type="text" name="name" id="name" class="form-control @(ViewData.ModelState["name"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Tên thương hiệu" value="@Model.name" />
+                                <span class="text-danger">@Html.ValidationMessageFor(model => model.name)</span>
+                            </div>
+
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="description">Mô tả</label>
+                                <input type="text" name="description" id="description" class="form-control @(ViewData.ModelState["description"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Mô tả" value="@Model.description" />
+                                <span class="text-danger">@Html.ValidationMessageFor(model => model.description)</span>
+                            </div>
+
+                            @*<div class="form-group col-md-12 mb-3">
+                                <label for="ImageUpload">Hình ảnh</label>
+                                <input type="file" name="ImageUpload" id="ImageUpload" class="form-control @(ViewData.ModelState["ImageUpload"]?.Errors.Count > 0 ? "is-invalid" : "")" onchange="validateFileSize()" />
+                                <span class="text-danger">@Html.ValidationMessage("ImageUpload")</span>
+                            </div>*@
+
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="status">Trạng thái</label>
+                                <select name="status" id="status" class="form-control @(ViewData.ModelState["status"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                                    <option value="2" @(Model.status == 2 ? "selected" : "")>Chưa xuất bản</option>
+                                    <option value="1" @(Model.status == 1 ? "selected" : "")>Xuất bản</option>
+                                </select>
+                                <span class="text-danger">@Html.ValidationMessage("status")</span>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <button class="btn btn-primary w-100" type="submit">Thêm thương hiệu</button>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function validateFileSize() {
+        var file = document.getElementById('ImageUpload').files[0];
+        if (file.size > 10485760) { // 10 MB in bytes
+            alert('File quá lớn, vui lòng tải tệp nhỏ hơn 10 MB.');
+            document.getElementById('ImageUpload').value = ''; // Clear the input
+        }
+    }
+</script>

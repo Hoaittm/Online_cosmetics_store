@@ -1,0 +1,103 @@
+﻿@model TranThiMinhHoai_2122110262.Areas.Admin.Controllers.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Chi tiết đơn hàng</h1>
+            </div>  
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 text-right">
+                    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-info" })
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Thông tin đơn hàng</h3>
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td>@Model.Order.id</td>
+                </tr>
+                <tr>
+                    <th>User ID</th>
+                    <td>@Model.Order.userid</td>
+                </tr>
+                <tr>
+                    <th>Ngày tạo</th>
+                    <td>@Model.Order.CreatedOnUtc.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <th>Địa chỉ</th>
+                    <td>@Model.Order.address</td>
+                </tr>
+                <tr>
+                    <th>Trạng thái</th>
+                    <td>
+                        <form action="@Url.Action("UpdateStatus", "Order", new { id = Model.Order.id })" method="post">
+                            <div class="form-group">
+                                <label for="status">Trạng thái:</label>
+                                <select id="status" name="status" class="form-control">
+                                    <option value="0" @(Model.Order.status == 0 ? "selected" : "")>Chưa xử lý</option>
+                                    <option value="1" @(Model.Order.status == 1 ? "selected" : "")>Đã xử lý</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Số tiền</th>
+                    <td>@Model.Order.amount.ToString()</td>
+                </tr>
+            </table>
+
+            <h3>Chi tiết đơn hàng</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Giảm giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>@item.id</td>
+                            <td>@item.product_id</td> <!-- Thay bằng tên sản phẩm nếu có sẵn -->
+                            <td>@item.price.ToString()</td>
+                            <td>@item.qty</td>
+                            <td>@item.discount.ToString()</td>
+                            <td>@item.amount.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+             
+            
+        </div>
+    </div>
+</section>

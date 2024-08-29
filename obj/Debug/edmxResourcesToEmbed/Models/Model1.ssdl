@@ -21,17 +21,17 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="name" Type="nvarchar" MaxLength="1000" />
-    <Property Name="slug" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="image" Type="nvarchar" MaxLength="1000" />
-    <Property Name="sort_order" Type="int" Nullable="false" />
-    <Property Name="description" Type="text" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="slug" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="image" Type="nvarchar" MaxLength="255" />
+    <Property Name="sort_order" Type="int" />
+    <Property Name="description" Type="nvarchar(max)" />
     <Property Name="created_at" Type="datetime" />
     <Property Name="updated_at" Type="datetime" />
     <Property Name="created_by" Type="int" Nullable="false" />
     <Property Name="updated_by" Type="int" />
-    <Property Name="status" Type="tinyint" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>

@@ -11,7 +11,9 @@ namespace TranThiMinhHoai_2122110262.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Product
     {
         public long id { get; set; }
@@ -30,5 +32,7 @@ namespace TranThiMinhHoai_2122110262.Models
         public byte status { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

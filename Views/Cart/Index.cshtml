@@ -39,12 +39,7 @@
                                                 </figure>
                                             </td>
                                             <td>
-                                                <select class="form-control quantity" data-id="@item.Product.id">
-                                                    @for (int i = 1; i <= 10; i++)
-                                                    {
-                                                        <option value="@i" @(i == item.Quantity ? "selected" : "")>@i</option>
-                                                    }
-                                                </select>
+                                                <input type="number" class="form-control quantity" data-id="@item.Product.id" value="@item.Quantity" min="1" />
                                             </td>
                                             <td>
                                                 <div class="price-wrap">

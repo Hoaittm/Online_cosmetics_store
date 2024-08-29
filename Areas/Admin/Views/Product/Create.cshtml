@@ -1,147 +1,135 @@
 ﻿@model TranThiMinhHoai_2122110262.Models.Product
 
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm sản phẩm";
 }
 
-<h2>Create</h2>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="breadcrumb-item active">Product Page</li>
+                </ol>
+            </div>
+        </div>  
+    </div>
+</section>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.category_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 text-right">
+                    @Html.ActionLink("Về danh sách", "Index", null, new { @class = "btn btn-sm btn-info" })
+                </div>
             </div>
         </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+               
+                @Html.AntiForgeryToken()
+                <h1 class="text-center">Thêm sản phẩm</h1>
+                <div class="container">
+                    <div class="row g-3">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.brand_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.brand_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.brand_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="name">Tên sản phẩm</label>
+                            <input name="name" id="name" class="form-control @(ViewData.ModelState["name"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Tên sản phẩm" type="text" value="@Model.name">
+                            <span class="text-danger">@Html.ValidationMessage("name")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="category_id">Danh mục</label>
+                            <select name="category_id" id="category_id" class="form-control @(ViewData.ModelState["category_id"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                                @foreach (var item in ViewBag.category_id as SelectList)
+                                {
+                                    <option value="@item.Value" @(item.Value == @Model.category_id.ToString() ? "selected" : "")>@item.Text</option>
+                                }
+                            </select>
+                            <span class="text-danger">@Html.ValidationMessage("category_id")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.slug, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.slug, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="brand_id">Thương hiệu</label>
+                            <select name="brand_id" id="brand_id" class="form-control @(ViewData.ModelState["brand_id"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                                @foreach (var item in ViewBag.brand_id as SelectList)
+                                {
+                                    <option value="@item.Value" @(item.Value == @Model.brand_id.ToString() ? "selected" : "")>@item.Text</option>
+                                }
+                            </select>
+                            <span class="text-danger">@Html.ValidationMessage("brand_id")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="detail">Chi tiết</label>
+                            <textarea name="detail" id="detail" class="form-control @(ViewData.ModelState["detail"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Chi tiết" rows="2">@Model.detail</textarea>
+                            <span class="text-danger">@Html.ValidationMessage("detail")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.pricesale, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.pricesale, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pricesale, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="description">Mô tả</label>
+                            <textarea name="description" id="description" class="form-control @(ViewData.ModelState["description"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Mô tả" rows="5">@Model.description</textarea>
+                            <span class="text-danger">@Html.ValidationMessage("description")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="price">Giá</label>
+                            <input name="price" id="price" class="form-control @(ViewData.ModelState["price"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Giá" type="number" value="@Model.price">
+                            <span class="text-danger">@Html.ValidationMessage("price")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.qty, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.qty, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.qty, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="pricesale">Giá giảm</label>
+                            <input name="pricesale" id="pricesale" class="form-control @(ViewData.ModelState["pricesale"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Giá giảm" type="number" value="@Model.pricesale">
+                            <span class="text-danger">@Html.ValidationMessage("pricesale")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="qty">Số lượng</label>
+                            <input name="qty" id="qty" class="form-control @(ViewData.ModelState["qty"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Số lượng" type="number" value="@Model.qty">
+                            <span class="text-danger">@Html.ValidationMessage("qty")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="ImageUpload">Hình ảnh</label>
+        <input type="file" name="ImageUpload" id="ImageUpload" onchange="validateFileSize()" class="form-control @(ViewData.ModelState["image"]?.Errors.Count > 0 ? "is-invalid" : "")">
+        <span class="text-danger">@Html.ValidationMessage("ImageUpload")</span>
+        <script>
+            function validateFileSize() {
+                var file = document.getElementById('ImageUpload').files[0];
+                if (file.size > 10485760) { // 10 MB in bytes
+                    alert('File qua lớn, vui lòng tải tệp nhỏ hơn 10 MB.');
+                    document.getElementById('ImageUpload').value = ''; // Clear the input
+                }
+            }
+        </script>
+                            @*<input type="file" name="ImageUpload" id="ImageUpload" class="form-control @(ViewData.ModelState["ImageUpload"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                            <span class="text-danger">@Html.ValidationMessage("ImageUpload")</span>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.created_by, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.created_by, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.created_by, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.updated_by, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.updated_by, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.updated_by, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="status">Trạng thái</label>
+                            <select name="status" id="status" class="form-control @(ViewData.ModelState["status"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                                <option value="2" @(Model.status == 2 ? "selected" : "")>Chưa xuất bản</option>
+                                <option value="1" @(Model.status == 1 ? "selected" : "")>Xuất bản</option>
+                            </select>
+                            <span class="text-danger">@Html.ValidationMessage("status")</span>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.created_at, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.created_at, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.created_at, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.updated_at, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.updated_at, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.updated_at, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                        <div class="col-md-12 mb-3">
+                            <button class="btn btn-primary w-100" type="submit">Thêm sản phẩm</button>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</section>

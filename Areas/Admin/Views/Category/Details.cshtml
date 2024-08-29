@@ -1,0 +1,68 @@
+﻿@model TranThiMinhHoai_2122110262.Models.Category
+
+@{
+    ViewBag.Title = "Chi tiết danh mục";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Chi tiết danh mục</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 text-right">
+                    @Html.ActionLink("Sửa", "Edit", new { id = Model.id }, new { @class = "btn btn-sm btn-primary" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = Model.id }, new { @class = "btn btn-sm btn-danger" })
+                    @Html.ActionLink("Về danh sách", "Index", null, new { @class = "btn btn-sm btn-info" })
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <td class="text-center"><strong>Tên danh mục</strong></td>
+                        <td class="text-center">@Model.name</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><strong>Slug</strong></td>
+                        <td class="text-center">@Model.slug</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><strong>Mô tả</strong></td>
+                        <td class="text-center">@Model.description</td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center"><strong>Hình ảnh</strong></td>
+                        <td class="text-center">
+                            <img src="@Url.Content("~/Content/images/category/" + @Model.image)" alt="@Model.name" style="width: 100px; height: 100px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><strong>Trạng thái</strong></td>
+                        <td class="text-center">
+                            @if (Model.status == 1)
+                            {
+                                @:Xuất bản
+                            }
+                            else
+                            {
+                                @:Chưa xuất bản
+                            }
+                        </td>
+                    </tr>
+                     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

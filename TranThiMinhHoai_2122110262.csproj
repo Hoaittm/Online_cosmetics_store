@@ -51,10 +51,43 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.4\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.2.2\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.2.2\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.2.2\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -126,9 +159,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -155,6 +193,7 @@
     <Compile Include="Models\Contact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -177,12 +216,14 @@
     <Compile Include="Models\Orderdetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartiaMetadataType.cs" />
     <Compile Include="Models\Post.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductMasterData.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -198,8 +239,6 @@
     <Content Include="Content\admin\dist\css\alt\adminlte.core.min.css" />
     <Content Include="Content\admin\dist\css\alt\adminlte.extra-components.css" />
     <Content Include="Content\admin\dist\css\alt\adminlte.extra-components.min.css" />
-    <Content Include="Content\admin\dist\css\alt\adminlte.light.css" />
-    <Content Include="Content\admin\dist\css\alt\adminlte.light.min.css" />
     <Content Include="Content\admin\dist\css\alt\adminlte.pages.css" />
     <Content Include="Content\admin\dist\css\alt\adminlte.pages.min.css" />
     <Content Include="Content\admin\dist\css\alt\adminlte.plugins.css" />
@@ -476,7 +515,6 @@
     <Content Include="Content\admin\plugins\codemirror\mode\z80\z80.js" />
     <Content Include="Content\admin\plugins\codemirror\theme\3024-day.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\3024-night.css" />
-    <Content Include="Content\admin\plugins\codemirror\theme\abbott.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\abcdef.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\ambiance-mobile.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\ambiance.css" />
@@ -500,7 +538,6 @@
     <Content Include="Content\admin\plugins\codemirror\theme\icecoder.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\idea.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\isotope.css" />
-    <Content Include="Content\admin\plugins\codemirror\theme\juejin.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\lesser-dark.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\liquibyte.css" />
     <Content Include="Content\admin\plugins\codemirror\theme\lucario.css" />
@@ -652,9 +689,6 @@
     <Content Include="Content\admin\plugins\filterizr\vanilla.filterizr.min.js" />
     <Content Include="Content\admin\plugins\flag-icon-css\css\flag-icon.css" />
     <Content Include="Content\admin\plugins\flag-icon-css\css\flag-icon.min.css" />
-    <Content Include="Content\admin\plugins\flag-icon-css\css\flag-icons.css" />
-    <Content Include="Content\admin\plugins\flag-icon-css\css\flag-icons.min.css" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ac.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ad.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ae.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\af.svg" />
@@ -704,7 +738,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cm.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cn.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\co.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cp.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cr.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cu.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cv.svg" />
@@ -713,20 +746,17 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cy.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\cz.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\de.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\dg.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\dj.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\dk.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\dm.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\do.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\dz.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ea.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ec.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ee.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\eg.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\eh.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\er.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\es-ca.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\es-ct.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\es-ga.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\es.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\et.svg" />
@@ -766,7 +796,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\hr.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ht.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\hu.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ic.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\id.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ie.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\il.svg" />
@@ -880,7 +909,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\sx.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\sy.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\sz.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ta.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\tc.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\td.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\tf.svg" />
@@ -914,13 +942,11 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\wf.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ws.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\xk.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\xx.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\ye.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\yt.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\za.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\zm.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\1x1\zw.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ac.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ad.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ae.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\af.svg" />
@@ -970,7 +996,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cm.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cn.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\co.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cp.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cr.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cu.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cv.svg" />
@@ -979,20 +1004,17 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cy.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\cz.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\de.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\dg.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\dj.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\dk.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\dm.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\do.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\dz.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ea.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ec.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ee.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\eg.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\eh.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\er.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\es-ca.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\es-ct.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\es-ga.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\es.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\et.svg" />
@@ -1032,7 +1054,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\hr.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ht.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\hu.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ic.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\id.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ie.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\il.svg" />
@@ -1146,7 +1167,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\sx.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\sy.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\sz.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ta.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\tc.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\td.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\tf.svg" />
@@ -1180,7 +1200,6 @@
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\wf.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ws.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\xk.svg" />
-    <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\xx.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\ye.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\yt.svg" />
     <Content Include="Content\admin\plugins\flag-icon-css\flags\4x3\za.svg" />
@@ -1242,7 +1261,6 @@
     <Content Include="Content\admin\plugins\fullcalendar\locales\ar.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\az.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\bg.js" />
-    <Content Include="Content\admin\plugins\fullcalendar\locales\bn.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\bs.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\ca.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\cs.js" />
@@ -1276,9 +1294,7 @@
     <Content Include="Content\admin\plugins\fullcalendar\locales\ja.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\ka.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\kk.js" />
-    <Content Include="Content\admin\plugins\fullcalendar\locales\km.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\ko.js" />
-    <Content Include="Content\admin\plugins\fullcalendar\locales\ku.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\lb.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\lt.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\lv.js" />
@@ -1293,10 +1309,8 @@
     <Content Include="Content\admin\plugins\fullcalendar\locales\pt.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\ro.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\ru.js" />
-    <Content Include="Content\admin\plugins\fullcalendar\locales\si-lk.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\sk.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\sl.js" />
-    <Content Include="Content\admin\plugins\fullcalendar\locales\sm.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\sq.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\sr-cyrl.js" />
     <Content Include="Content\admin\plugins\fullcalendar\locales\sr.js" />
@@ -1316,7 +1330,6 @@
     <Content Include="Content\admin\plugins\fullcalendar\main.min.js" />
     <Content Include="Content\admin\plugins\icheck-bootstrap\icheck-bootstrap.css" />
     <Content Include="Content\admin\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
-    <Content Include="Content\admin\plugins\inputmask\inputmask.es6.js" />
     <Content Include="Content\admin\plugins\inputmask\inputmask.js" />
     <Content Include="Content\admin\plugins\inputmask\inputmask.min.js" />
     <Content Include="Content\admin\plugins\inputmask\jquery.inputmask.js" />
@@ -1940,8 +1953,6 @@
     <Content Include="Content\admin\plugins\summernote\lang\summernote-bg-BG.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-bg-BG.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-bg-BG.min.js.LICENSE.txt" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-bn-BD.js" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-bn-BD.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-ca-ES.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-ca-ES.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-ca-ES.min.js.LICENSE.txt" />
@@ -1951,16 +1962,12 @@
     <Content Include="Content\admin\plugins\summernote\lang\summernote-da-DK.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-da-DK.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-da-DK.min.js.LICENSE.txt" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-de-CH.js" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-de-CH.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-de-DE.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-de-DE.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-de-DE.min.js.LICENSE.txt" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-el-GR.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-el-GR.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-el-GR.min.js.LICENSE.txt" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-en-US.js" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-en-US.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-es-ES.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-es-ES.min.js" />
     <Content Include="Content\admin\plugins\summernote\lang\summernote-es-ES.min.js.LICENSE.txt" />
@@ -2078,10 +2085,6 @@
     <Content Include="Content\admin\plugins\summernote\summernote-bs4.min.css" />
     <Content Include="Content\admin\plugins\summernote\summernote-bs4.min.js" />
     <Content Include="Content\admin\plugins\summernote\summernote-bs4.min.js.LICENSE.txt" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.css" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.js" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.min.css" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.min.js" />
     <Content Include="Content\admin\plugins\summernote\summernote-lite.css" />
     <Content Include="Content\admin\plugins\summernote\summernote-lite.js" />
     <Content Include="Content\admin\plugins\summernote\summernote-lite.min.css" />
@@ -2338,6 +2341,12 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Content\images\posts\Mách bạn bí quyết trị nám tại nhà hiệu quả nhất.webp" />
+    <Content Include="Content\images\posts\son-duong-moi-ads.webp" />
+    <Content Include="Content\images\posts\sss.webp" />
+    <Content Include="Content\images\posts\ssss.webp" />
+    <Content Include="Content\images\posts\Xu hướng lông mày khộng thể bỏ qua.webp" />
     <Content Include="Content\admin\dist\css\adminlte.css.map" />
     <Content Include="Content\admin\dist\css\adminlte.min.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.components.css.map" />
@@ -2346,8 +2355,6 @@
     <Content Include="Content\admin\dist\css\alt\adminlte.core.min.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.extra-components.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.extra-components.min.css.map" />
-    <Content Include="Content\admin\dist\css\alt\adminlte.light.css.map" />
-    <Content Include="Content\admin\dist\css\alt\adminlte.light.min.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.pages.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.pages.min.css.map" />
     <Content Include="Content\admin\dist\css\alt\adminlte.plugins.css.map" />
@@ -2407,77 +2414,35 @@
     <Content Include="Content\admin\plugins\popper\umd\popper.js.map" />
     <Content Include="Content\admin\plugins\popper\umd\popper.min.js.map" />
     <Content Include="Content\admin\plugins\summernote\font\summernote.eot" />
-    <Content Include="Content\admin\plugins\summernote\font\summernote.hash" />
     <Content Include="Content\admin\plugins\summernote\font\summernote.ttf" />
     <Content Include="Content\admin\plugins\summernote\font\summernote.woff" />
     <Content Include="Content\admin\plugins\summernote\font\summernote.woff2" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ar-AR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-az-AZ.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-bg-BG.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-bn-BD.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ca-ES.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-cs-CZ.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-da-DK.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-de-CH.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-de-DE.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-el-GR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-en-US.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-es-ES.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-es-EU.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-fa-IR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-fi-FI.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-fr-FR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-gl-ES.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-he-IL.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-hr-HR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-hu-HU.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-id-ID.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-it-IT.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ja-JP.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ko-KR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-lt-LT.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-lt-LV.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-mn-MN.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-nb-NO.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-nl-NL.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-pl-PL.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-pt-BR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-pt-PT.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ro-RO.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ru-RU.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-sk-SK.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-sl-SI.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-sr-RS-Latin.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-sr-RS.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-sv-SE.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-ta-IN.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-th-TH.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-tr-TR.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-uk-UA.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-uz-UZ.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-vi-VN.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-zh-CN.js.map" />
-    <Content Include="Content\admin\plugins\summernote\lang\summernote-zh-TW.js.map" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs4.css.map" />
     <Content Include="Content\admin\plugins\summernote\summernote-bs4.js.map" />
     <Content Include="Content\admin\plugins\summernote\summernote-bs4.min.js.map" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.css.map" />
-    <Content Include="Content\admin\plugins\summernote\summernote-bs5.js.map" />
-    <Content Include="Content\admin\plugins\summernote\summernote-lite.css.map" />
     <Content Include="Content\admin\plugins\summernote\summernote-lite.js.map" />
     <Content Include="Content\admin\plugins\summernote\summernote-lite.min.js.map" />
-    <Content Include="Content\admin\plugins\summernote\summernote.css.map" />
     <Content Include="Content\admin\plugins\summernote\summernote.js.map" />
     <Content Include="Content\admin\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\admin\plugins\toastr\toastr.js.map" />
-    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\admin.cshtml" />
-    <Content Include="Content\images\posts\Mách bạn bí quyết trị nám tại nhà hiệu quả nhất.webp" />
-    <Content Include="Content\images\posts\son-duong-moi-ads.webp" />
-    <Content Include="Content\images\posts\sss.webp" />
-    <Content Include="Content\images\posts\ssss.webp" />
-    <Content Include="Content\images\posts\Xu hướng lông mày khộng thể bỏ qua.webp" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

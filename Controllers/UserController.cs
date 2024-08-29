@@ -10,12 +10,84 @@ using TranThiMinhHoai_2122110262.Models;
 using TranThiMinhHoai_2122110262.Helpers;
 using System.Web.Helpers;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Owin.Security;
+using System.Threading.Tasks;
 namespace TranThiMinhHoai_2122110262.Controllers
 {
     public class UserController : Controller
     {
         private TranThiMinhHoaiEntities1 db = new TranThiMinhHoaiEntities1();
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
+        [AllowAnonymous]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            // Request a redirect to the external login provider
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "User", new { ReturnUrl = returnUrl }));
+        }
+
+        private class ChallengeResult : HttpUnauthorizedResult
+        {
+            public ChallengeResult(string provider, string redirectUri)
+            {
+                LoginProvider = provider;
+                RedirectUri = redirectUri;
+            }
+
+            public string LoginProvider { get; set; }
+            public string RedirectUri { get; set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
+                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+            }
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        {
+            // Retrieve the login info from the external login provider
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Get the email from the external login info
+            string email = loginInfo.Email;
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                // Remove the domain part from the email
+                string username = email.Split('@')[0];
+
+                // Set the session variable with the username
+                Session["name"] = username;
+                Session["UserId"] = 14;
+                //Session["name"] = "hehe";
+
+                Session["Email"] = email;
+                Session["Phone"] = "0359534826";
+                Session["Roles"] = "admin";
+                // Optionally, you could also set other session variables or perform additional logic here
+            }
+
+            // Redirect to the return URL or to the home page
+            return RedirectToLocal(returnUrl);
+        }
+
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+    
         // GET: User
         public ActionResult Index()
         {

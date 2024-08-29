@@ -185,16 +185,16 @@ namespace TranThiMinhHoai_2122110262.Controllers
                 string userName = Session["Name"].ToString();
                 string userPhone = Session["Phone"].ToString();
                 string userEmail = Session["Email"].ToString();
-                string userAddress = Session["City"].ToString() + Session["Country"].ToString();
+                //string userAddress = Session["City"].ToString() + Session["Country"].ToString();
 
                 // Construct the email content
                 string content = $"Xin chào ! {userName},\n\n";
                 content += "Cảm ơn bạn đã mua hàng!\n";
-                content += $"Đơn hàng của bạn với tổng số tiền  {totalAmount.ToString()} VND đã được đặt thành công.\n\n";
+                content += $"Đơn hàng của bạn với tổng số tiền {totalAmount.ToString()} VND đã được đặt thành công.\n\n";
                 content += "Chi tiết đơn hàng:\n";
                 content += $"Số điện thoại: {userPhone}\n";
                 content += $"Email: {userEmail}\n";
-                content += $"Địa chỉ: {userAddress}\n\n";
+                //content += $"Địa chỉ: {userAddress}\n\n";
                 content += "Chúng tôi sẽ thông báo cho bạn khi đơn hàng của bạn đã được chuyển đi.\n";
                 content += "Cảm ơn bạn đã mua sắm với chúng tôi!\n";
 

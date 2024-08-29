@@ -10,11 +10,11 @@
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Order" Width="1.5" PointX="7.25" PointY="1.125" />
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Orderdetail" Width="1.5" PointX="9.625" PointY="1.75" />
         <AssociationConnector Association="TranThiMinhHoaiModel1.FK__Orderdeta__order__71D1E811" />
-        <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Brand" Width="1.5" PointX="12.125" PointY="3.375" />
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Banner" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.User" Width="1.5" PointX="1" PointY="2.75" />
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Post" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Contact" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="TranThiMinhHoaiModel1.Brand" Width="1.5" PointX="9.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

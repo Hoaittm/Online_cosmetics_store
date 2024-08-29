@@ -8,10 +8,10 @@
             <form asp-action="Login" asp-controller="User" method="post">
                 @Html.AntiForgeryToken()
 
-                <a href="#" class="btn btn-facebook btn-block mb-2">
+                @*<a href="#" class="btn btn-facebook btn-block mb-2">
                     <i class="fab fa-facebook-f"></i> &nbsp; Đăng nhập bằng Facebook
-                </a>
-                <a href="#" class="btn btn-google btn-block mb-4">
+                </a>*@
+                <a href="@Url.Action("ExternalLogin", "User", new { provider = "Google", returnUrl = Url.Action("Index", "Home") })" class="btn btn-google btn-block mb-4">
                     <i class="fab fa-google"></i> &nbsp; Đăng nhập bằng Google
                 </a>
 

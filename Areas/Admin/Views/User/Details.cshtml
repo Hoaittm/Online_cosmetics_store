@@ -1,0 +1,101 @@
+﻿@model TranThiMinhHoai_2122110262.Areas.Admin.Controllers.UserOrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Chi tiết người dùng";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewBag.Title</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            <h4>Thông tin người dùng</h4>
+            <hr />
+            <dl class="row">
+
+
+                <dt class="col-sm-2">
+                    Tên :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.name
+                </dd>
+                <dt class="col-sm-2">
+                    Email :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.email
+                </dd>
+                <dt class="col-sm-2">
+                    Thành phố :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.city
+                </dd>
+                <dt class="col-sm-2">
+                    Quốc gia :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.country
+                </dd>
+                <dt class="col-sm-2">
+                    Số điện thoại :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.phone
+                </dd>
+                <dt class="col-sm-2">
+                    Giới tính :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.gender
+                </dd>
+            </dl>
+
+            <h4>Thông tin đơn hàng</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Số tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <td>@order.id</td>
+                            <td>@order.CreatedOnUtc.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (order.status == 1)
+                                {
+                                    @:Đã xử lý
+                                }
+                                else
+                                {
+                                    @:Chưa xử lý
+                                }
+                            </td>
+                            <td>@order.amount.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
